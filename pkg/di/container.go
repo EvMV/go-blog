@@ -1,21 +1,22 @@
 package di
 
 import (
-	"awesomeProject/internal/api/auth"
+	"awesomeProject/internal/application/interactor/auth/register"
+	repository2 "awesomeProject/internal/application/repository"
+	"awesomeProject/internal/infrastructure/repository"
+	"awesomeProject/internal/interfaceAdapters/auth"
+	"awesomeProject/pkg/db"
 	"awesomeProject/pkg/route"
 	"awesomeProject/pkg/server"
 	"go.uber.org/fx"
-	"log"
 )
 
-func BuildContainer() *fx.App {
+func ConfigureApp() *fx.App {
 	app := fx.New(
-		fx.Provide(func() *log.Logger {
-			return log.Default()
-		}),
+		fx.Provide(db.NewPostgresConnection),
+		fx.Provide(register.NewRegisterInteractor),
 		fx.Provide(
-			AsRoute(auth.NewLoginHandler),
-			AsRoute(auth.NewRegisterHandler),
+			AsRequestHandler(auth.NewRegisterHandler),
 		),
 		fx.Provide(
 			fx.Annotate(
@@ -23,16 +24,26 @@ func BuildContainer() *fx.App {
 				fx.ParamTags(`group:"routes"`),
 			),
 		),
-		fx.Invoke(func(apiServer *server.APIServer) {}),
+		fx.Provide(
+			fx.Annotate(
+				repository.NewPgUserRepository,
+				fx.As(new(repository2.UserRepository)),
+			),
+		),
+		fx.Invoke(StartServer),
 	)
 
 	return app
 }
 
-func AsRoute(handler any) any {
+func AsRequestHandler(handler any) any {
 	return fx.Annotate(
 		handler,
 		fx.As(new(route.Route)),
 		fx.ResultTags(`group:"routes"`),
 	)
+}
+
+func StartServer(s *server.APIServer) {
+	s.Start()
 }

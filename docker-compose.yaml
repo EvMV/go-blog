@@ -1,0 +1,15 @@
+version: '3.7'
+services:
+  postgresql:
+    image: postgres:13.1
+    environment:
+      - "PGDATA=/var/lib/postgresql/data/pgdata"
+      - "POSTGRES_PASSWORD=qwerty"
+      - "POSTGRES_DB=blog"
+    volumes:
+      - "postgresdata:/var/lib/postgresql/data"
+    ports:
+      - "127.0.0.1:15432:5432"
+
+volumes:
+  postgresdata:
