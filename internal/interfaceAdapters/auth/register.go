@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-type RegisterHandler struct {
+type RegisterHandler struct { // FIXME: handler or controller?
 	interactor *register.RegisterInteractor
 }
 

@@ -16,7 +16,7 @@ func NewPgUserRepository(db *gorm.DB) *PgUserRepository {
 func (r *PgUserRepository) FindOneByEmail(email string) domain.User {
 	var user domain.User
 
-	r.db.First(&user, email)
+	r.db.First(&user, "email = ?", email)
 
 	return user
 }

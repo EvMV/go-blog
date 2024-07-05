@@ -1,8 +1,9 @@
 package di
 
 import (
+	"awesomeProject/internal/application/interactor/auth/login"
 	"awesomeProject/internal/application/interactor/auth/register"
-	repository2 "awesomeProject/internal/application/repository"
+	iUserRepository "awesomeProject/internal/application/repository"
 	"awesomeProject/internal/infrastructure/repository"
 	"awesomeProject/internal/interfaceAdapters/auth"
 	"awesomeProject/pkg/db"
@@ -15,8 +16,10 @@ func ConfigureApp() *fx.App {
 	app := fx.New(
 		fx.Provide(db.NewPostgresConnection),
 		fx.Provide(register.NewRegisterInteractor),
+		fx.Provide(login.NewLoginInteractor),
 		fx.Provide(
 			AsRequestHandler(auth.NewRegisterHandler),
+			AsRequestHandler(auth.NewLoginHandler),
 		),
 		fx.Provide(
 			fx.Annotate(
@@ -27,7 +30,7 @@ func ConfigureApp() *fx.App {
 		fx.Provide(
 			fx.Annotate(
 				repository.NewPgUserRepository,
-				fx.As(new(repository2.UserRepository)),
+				fx.As(new(iUserRepository.UserRepository)),
 			),
 		),
 		fx.Invoke(StartServer),
