@@ -3,7 +3,7 @@ package register
 import (
 	"awesomeProject/internal/application/interactor/auth/register/dto"
 	"awesomeProject/internal/application/repository"
-	"awesomeProject/internal/domain"
+	"awesomeProject/internal/domain/user"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -15,15 +15,15 @@ func NewRegisterInteractor(userRepository repository.UserRepository) *RegisterIn
 	return &RegisterInteractor{userRepository}
 }
 
-func (r RegisterInteractor) Execute(dto dto.RegisterDto) *domain.User {
+func (r RegisterInteractor) Execute(dto dto.RegisterDto) (*user.User, error) {
 	password, err := bcrypt.GenerateFromPassword([]byte(dto.Password), bcrypt.DefaultCost)
 
 	if err != nil {
-		panic(err) // FIXME
+		return nil, err
 	}
 
-	user := domain.NewUser(dto.Name, dto.Email, string(password))
+	user := user.NewUser(dto.Name, dto.Email, string(password))
 	r.userRepository.Save(user)
 
-	return user
+	return user, nil
 }

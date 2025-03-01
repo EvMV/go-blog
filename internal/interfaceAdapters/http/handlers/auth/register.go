@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-type RegisterHandler struct { // FIXME: handler or controller?
+type RegisterHandler struct {
 	interactor *register.RegisterInteractor
 }
 
@@ -23,7 +23,11 @@ func (h *RegisterHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	user := h.interactor.Execute(registerDto)
+	user, err := h.interactor.Execute(registerDto)
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 
 	if err := json.NewEncoder(w).Encode(user); err != nil {
 		http.Error(w, "Failed to send response", http.StatusInternalServerError)

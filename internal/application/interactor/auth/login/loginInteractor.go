@@ -3,9 +3,8 @@ package login
 import (
 	"awesomeProject/internal/application/interactor/auth/login/dto"
 	"awesomeProject/internal/application/repository"
-	"awesomeProject/internal/domain"
+	"awesomeProject/internal/domain/user"
 	"errors"
-	"fmt"
 	"github.com/golang-jwt/jwt/v4"
 	"golang.org/x/crypto/bcrypt"
 	"time"
@@ -21,7 +20,7 @@ func NewLoginInteractor(userRepository repository.UserRepository) *LoginInteract
 
 func (l *LoginInteractor) Execute(dto dto.LoginDto) (string, error) {
 	user := l.userRepository.FindOneByEmail(dto.Email)
-	fmt.Println(user)
+
 	err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(dto.Password))
 	if err != nil {
 		return "", errors.New("incorrect password")
@@ -32,7 +31,7 @@ func (l *LoginInteractor) Execute(dto dto.LoginDto) (string, error) {
 	return jwtToken.SignedString([]byte("Ws5Jhf"))
 }
 
-func createToken(user domain.User) *jwt.Token {
+func createToken(user *user.User) *jwt.Token {
 	jwtToken := jwt.New(jwt.SigningMethodHS256)
 	claims := jwtToken.Claims.(jwt.MapClaims)
 	claims["sub"] = user.Id

@@ -3,12 +3,17 @@ package di
 import (
 	"awesomeProject/internal/application/interactor/auth/login"
 	"awesomeProject/internal/application/interactor/auth/register"
-	iUserRepository "awesomeProject/internal/application/repository"
+	"awesomeProject/internal/application/interactor/post/createPost"
+	"awesomeProject/internal/application/interactor/post/getAuthorPostList"
+	iRepository "awesomeProject/internal/application/repository"
 	"awesomeProject/internal/infrastructure/repository"
-	"awesomeProject/internal/interfaceAdapters/auth"
+	"awesomeProject/internal/interfaceAdapters/http/handlers/auth"
+	"awesomeProject/internal/interfaceAdapters/http/handlers/post"
+	"awesomeProject/internal/interfaceAdapters/http/provider"
 	"awesomeProject/pkg/db"
 	"awesomeProject/pkg/route"
 	"awesomeProject/pkg/server"
+	"fmt"
 	"go.uber.org/fx"
 )
 
@@ -17,9 +22,13 @@ func ConfigureApp() *fx.App {
 		fx.Provide(db.NewPostgresConnection),
 		fx.Provide(register.NewRegisterInteractor),
 		fx.Provide(login.NewLoginInteractor),
+		fx.Provide(createPost.NewCreatePostInteractor),
+		fx.Provide(getAuthorPostList.NewGetAuthorPostList),
 		fx.Provide(
 			AsRequestHandler(auth.NewRegisterHandler),
 			AsRequestHandler(auth.NewLoginHandler),
+			AsRequestHandler(post.NewCreatePostHandler),
+			AsRequestHandler(post.NewGetAuthorPostListHandler),
 		),
 		fx.Provide(
 			fx.Annotate(
@@ -30,7 +39,15 @@ func ConfigureApp() *fx.App {
 		fx.Provide(
 			fx.Annotate(
 				repository.NewPgUserRepository,
-				fx.As(new(iUserRepository.UserRepository)),
+				fx.As(new(iRepository.UserRepository)),
+			),
+		),
+		fx.Provide(provider.NewUserProvider),
+		fx.Provide(provider.NewAuthorizeChecker),
+		fx.Provide(
+			fx.Annotate(
+				repository.NewPgPostRepository,
+				fx.As(new(iRepository.PostRepository)),
 			),
 		),
 		fx.Invoke(StartServer),
@@ -48,5 +65,7 @@ func AsRequestHandler(handler any) any {
 }
 
 func StartServer(s *server.APIServer) {
-	s.Start()
+	err := s.Start()
+
+	fmt.Println(err)
 }
