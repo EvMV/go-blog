@@ -7,7 +7,7 @@ type Post struct {
 	Title    string     `json:"title"`
 	Content  string     `json:"content"`
 	AuthorID int64      `json:"author_id"`
-	Author   *user.User `json:"user" gorm:"foreignKey:AuthorID;references:id"`
+	Author   *user.User `json:"author" gorm:"foreignKey:AuthorID;references:id"`
 }
 
 func NewPost(title, content string, author *user.User) *Post {

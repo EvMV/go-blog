@@ -10,12 +10,12 @@ import (
 )
 
 type GetAuthorPostListHandler struct {
-	interactor *getAuthorPostList.GetAuthorPostList
+	interactor *getAuthorPostList.GetAuthorPostListInteractor
 	auhorizer  *provider.AuthorizeChecker
 }
 
 func NewGetAuthorPostListHandler(
-	interactor *getAuthorPostList.GetAuthorPostList,
+	interactor *getAuthorPostList.GetAuthorPostListInteractor,
 	auhorizer *provider.AuthorizeChecker,
 ) *GetAuthorPostListHandler {
 	return &GetAuthorPostListHandler{interactor: interactor, auhorizer: auhorizer}
@@ -35,6 +35,7 @@ func (h *GetAuthorPostListHandler) ServeHTTP(w http.ResponseWriter, r *http.Requ
 
 	posts := h.interactor.Execute(userId)
 
+	w.Header().Set("Content-Type", "application/json")
 	if err := json.NewEncoder(w).Encode(posts); err != nil {
 		http.Error(w, "Failed to send response", http.StatusInternalServerError)
 		return

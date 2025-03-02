@@ -4,6 +4,7 @@ import (
 	"awesomeProject/internal/application/interactor/auth/login"
 	"awesomeProject/internal/application/interactor/auth/register"
 	"awesomeProject/internal/application/interactor/post/createPost"
+	"awesomeProject/internal/application/interactor/post/deletePost"
 	"awesomeProject/internal/application/interactor/post/getAuthorPostList"
 	iRepository "awesomeProject/internal/application/repository"
 	"awesomeProject/internal/infrastructure/repository"
@@ -23,12 +24,14 @@ func ConfigureApp() *fx.App {
 		fx.Provide(register.NewRegisterInteractor),
 		fx.Provide(login.NewLoginInteractor),
 		fx.Provide(createPost.NewCreatePostInteractor),
-		fx.Provide(getAuthorPostList.NewGetAuthorPostList),
+		fx.Provide(getAuthorPostList.NewGetAuthorPostListInteractor),
+		fx.Provide(deletePost.NewDeletePostInteractor),
 		fx.Provide(
 			AsRequestHandler(auth.NewRegisterHandler),
 			AsRequestHandler(auth.NewLoginHandler),
 			AsRequestHandler(post.NewCreatePostHandler),
 			AsRequestHandler(post.NewGetAuthorPostListHandler),
+			AsRequestHandler(post.NewDeletePostHandler),
 		),
 		fx.Provide(
 			fx.Annotate(
