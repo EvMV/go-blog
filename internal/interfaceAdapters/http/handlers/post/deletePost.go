@@ -1,9 +1,9 @@
 package post
 
 import (
-	"awesomeProject/internal/application/interactor/post/deletePost"
-	"awesomeProject/internal/interfaceAdapters/http/provider"
 	"fmt"
+	"goBlog/internal/application/interactor/post/deletePost"
+	"goBlog/internal/interfaceAdapters/http/provider"
 	"net/http"
 	"strconv"
 )

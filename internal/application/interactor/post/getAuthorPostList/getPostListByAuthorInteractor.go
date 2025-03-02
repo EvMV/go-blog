@@ -1,8 +1,8 @@
 package getAuthorPostList
 
 import (
-	"awesomeProject/internal/application/repository"
-	"awesomeProject/internal/domain/post"
+	"goBlog/internal/application/repository"
+	"goBlog/internal/domain/post"
 )
 
 type GetAuthorPostListInteractor struct {

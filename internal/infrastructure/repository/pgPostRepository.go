@@ -1,8 +1,7 @@
 package repository
 
 import (
-	"awesomeProject/internal/domain/post"
-	"fmt"
+	"goBlog/internal/domain/post"
 	"gorm.io/gorm"
 )
 
@@ -21,7 +20,7 @@ func (r *pgPostRepository) Save(post *post.Post) {
 func (r *pgPostRepository) FindAllByAuthorId(authorId int64) []*post.Post {
 	var posts []*post.Post
 	r.db.Where("author_id = ?", authorId).Preload("Author").Find(&posts)
-	fmt.Println(posts[0])
+
 	return posts
 }
 

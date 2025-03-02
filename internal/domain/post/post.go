@@ -1,6 +1,6 @@
 package post
 
-import "awesomeProject/internal/domain/user"
+import "goBlog/internal/domain/user"
 
 type Post struct {
 	Id       int64      `json:"id"`

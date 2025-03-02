@@ -1,4 +1,4 @@
-module awesomeProject
+module goBlog
 
 go 1.22
 

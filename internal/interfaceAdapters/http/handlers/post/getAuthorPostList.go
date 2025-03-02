@@ -1,10 +1,10 @@
 package post
 
 import (
-	"awesomeProject/internal/application/interactor/post/getAuthorPostList"
-	"awesomeProject/internal/interfaceAdapters/http/provider"
 	"encoding/json"
 	"fmt"
+	"goBlog/internal/application/interactor/post/getAuthorPostList"
+	"goBlog/internal/interfaceAdapters/http/provider"
 	"net/http"
 	"strconv"
 )

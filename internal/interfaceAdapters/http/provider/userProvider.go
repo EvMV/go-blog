@@ -1,10 +1,10 @@
 package provider
 
 import (
-	"awesomeProject/internal/application/repository"
-	"awesomeProject/internal/domain/user"
 	"errors"
 	"github.com/golang-jwt/jwt/v4"
+	"goBlog/internal/application/repository"
+	"goBlog/internal/domain/user"
 	"net/http"
 )
 

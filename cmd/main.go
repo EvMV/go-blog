@@ -1,9 +1,9 @@
 package main
 
 import (
-	"awesomeProject/pkg/di"
 	"fmt"
 	"github.com/joho/godotenv"
+	"goBlog/pkg/di"
 )
 
 func init() {

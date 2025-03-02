@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"awesomeProject/internal/domain/user"
+	"goBlog/internal/domain/user"
 	"gorm.io/gorm"
 )
 

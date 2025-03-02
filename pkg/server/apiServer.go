@@ -1,7 +1,7 @@
 package server
 
 import (
-	"awesomeProject/pkg/route"
+	"goBlog/pkg/route"
 	"net/http"
 )
 

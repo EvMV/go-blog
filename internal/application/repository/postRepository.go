@@ -1,6 +1,6 @@
 package repository
 
-import "awesomeProject/internal/domain/post"
+import "goBlog/internal/domain/post"
 
 type PostRepository interface {
 	Save(post *post.Post)

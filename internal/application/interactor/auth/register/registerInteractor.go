@@ -1,9 +1,9 @@
 package register
 
 import (
-	"awesomeProject/internal/application/interactor/auth/register/dto"
-	"awesomeProject/internal/application/repository"
-	"awesomeProject/internal/domain/user"
+	"goBlog/internal/application/interactor/auth/register/dto"
+	"goBlog/internal/application/repository"
+	"goBlog/internal/domain/user"
 	"golang.org/x/crypto/bcrypt"
 )
 

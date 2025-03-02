@@ -1,21 +1,21 @@
 package di
 
 import (
-	"awesomeProject/internal/application/interactor/auth/login"
-	"awesomeProject/internal/application/interactor/auth/register"
-	"awesomeProject/internal/application/interactor/post/createPost"
-	"awesomeProject/internal/application/interactor/post/deletePost"
-	"awesomeProject/internal/application/interactor/post/getAuthorPostList"
-	iRepository "awesomeProject/internal/application/repository"
-	"awesomeProject/internal/infrastructure/repository"
-	"awesomeProject/internal/interfaceAdapters/http/handlers/auth"
-	"awesomeProject/internal/interfaceAdapters/http/handlers/post"
-	"awesomeProject/internal/interfaceAdapters/http/provider"
-	"awesomeProject/pkg/db"
-	"awesomeProject/pkg/route"
-	"awesomeProject/pkg/server"
 	"fmt"
 	"go.uber.org/fx"
+	"goBlog/internal/application/interactor/auth/login"
+	"goBlog/internal/application/interactor/auth/register"
+	"goBlog/internal/application/interactor/post/createPost"
+	"goBlog/internal/application/interactor/post/deletePost"
+	"goBlog/internal/application/interactor/post/getAuthorPostList"
+	iRepository "goBlog/internal/application/repository"
+	"goBlog/internal/infrastructure/repository"
+	"goBlog/internal/interfaceAdapters/http/handlers/auth"
+	"goBlog/internal/interfaceAdapters/http/handlers/post"
+	"goBlog/internal/interfaceAdapters/http/provider"
+	"goBlog/pkg/db"
+	"goBlog/pkg/route"
+	"goBlog/pkg/server"
 )
 
 func ConfigureApp() *fx.App {

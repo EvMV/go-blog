@@ -1,9 +1,9 @@
 package deletePost
 
 import (
-	"awesomeProject/internal/application/repository"
-	"awesomeProject/internal/domain/user"
 	"errors"
+	"goBlog/internal/application/repository"
+	"goBlog/internal/domain/user"
 )
 
 type DeletePostInteractor struct {

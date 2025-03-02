@@ -1,11 +1,11 @@
 package login
 
 import (
-	"awesomeProject/internal/application/interactor/auth/login/dto"
-	"awesomeProject/internal/application/repository"
-	"awesomeProject/internal/domain/user"
 	"errors"
 	"github.com/golang-jwt/jwt/v4"
+	"goBlog/internal/application/interactor/auth/login/dto"
+	"goBlog/internal/application/repository"
+	"goBlog/internal/domain/user"
 	"golang.org/x/crypto/bcrypt"
 	"time"
 )

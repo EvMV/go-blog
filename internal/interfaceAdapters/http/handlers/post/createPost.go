@@ -1,10 +1,10 @@
 package post
 
 import (
-	"awesomeProject/internal/application/interactor/post/createPost"
-	"awesomeProject/internal/application/interactor/post/createPost/dto"
-	"awesomeProject/internal/interfaceAdapters/http/provider"
 	"encoding/json"
+	"goBlog/internal/application/interactor/post/createPost"
+	"goBlog/internal/application/interactor/post/createPost/dto"
+	"goBlog/internal/interfaceAdapters/http/provider"
 	"net/http"
 )
 

@@ -1,10 +1,10 @@
 package createPost
 
 import (
-	"awesomeProject/internal/application/interactor/post/createPost/dto"
-	"awesomeProject/internal/application/repository"
-	"awesomeProject/internal/domain/post"
-	"awesomeProject/internal/domain/user"
+	"goBlog/internal/application/interactor/post/createPost/dto"
+	"goBlog/internal/application/repository"
+	"goBlog/internal/domain/post"
+	"goBlog/internal/domain/user"
 )
 
 type CreatePostInteractor struct {

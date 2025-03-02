@@ -1,9 +1,9 @@
 package auth
 
 import (
-	"awesomeProject/internal/application/interactor/auth/login"
-	"awesomeProject/internal/application/interactor/auth/login/dto"
 	"encoding/json"
+	"goBlog/internal/application/interactor/auth/login"
+	"goBlog/internal/application/interactor/auth/login/dto"
 	"net/http"
 )
 
